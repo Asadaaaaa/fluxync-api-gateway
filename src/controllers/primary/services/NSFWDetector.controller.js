@@ -27,7 +27,7 @@ class NSFWDetectorController {
 
     const { image } = req.body;
     
-    const demoPredictSrv = await this.NSFWDetectorService.demoDetector(image);
+    const demoPredictSrv = await this.NSFWDetectorService.demoDetector(image, req.body.uuid, req.body.secret_key);
     if(demoPredictSrv === -1) return res.status(404).json(this.ResponsePreset.resErr(
       400,
       'Bad Request, Image Not Provide',
@@ -49,11 +49,11 @@ class NSFWDetectorController {
       { code: -3 }
     ));
 
-    if(demoPredictSrv === -4) return res.status(500).json(this.ResponsePreset.resErr(
+    if(demoPredictSrv === -500) return res.status(500).json(this.ResponsePreset.resErr(
       500,
       'Internal Server Error, NSFW Detector Service Error',
       'service',
-      { code: -4 }
+      { code: -500 }
     ));
 
     return res.status(200).json(this.ResponsePreset.resOK(

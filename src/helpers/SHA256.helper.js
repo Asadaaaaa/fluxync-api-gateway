@@ -12,14 +12,9 @@ class Sha256Helper {
     return Crypto.createHash('sha256').update(data + (salt === null ? '' : '-' + salt)).digest('hex');;
   }
 
-  /**
-   * 
-   * @param { Buffer } data
-   * @returns Hash Sha256
-   * @description This function is used to hash a buffer data
-  */
   getHashFromBuffer(data) {
     return Crypto.createHash('sha256').update(data).digest('hex');;
   }
 }
 
+export default Sha256Helper;
